@@ -71,6 +71,24 @@ add_action( 'init', function () : void {
             'show_in_rest' => true,
         ]
     );
+
+    register_block_bindings_source(
+        'block-bindings-talk/featured-image-metadata',
+        [
+            'label'              => 'Featured Image Metadata',
+            'get_value_callback' => function ( array $source_args, \WP_Block $block_instance ) : ?string {
+                $post_id      = $block_instance->context['postId'] ?? null;
+                $thumbnail_id = get_post_thumbnail_id( $post_id );
+                if ( ! $thumbnail_id ) return null;
+                $file = get_attached_file( $thumbnail_id );
+                if ( ! $file ) return null;
+                $meta = wp_read_image_metadata( $file );
+                $key  = $source_args['key'] ?? null;
+                return ( $key && isset( $meta[ $key ] ) ) ? (string) $meta[ $key ] : null;
+            },
+            'uses_context' => [ 'postId' ],
+        ]
+    );
 } );
 
 /**
