@@ -96,7 +96,7 @@ function FeaturedImageMetadataPanel() {
 		if ( ! featuredImageId ) return null;
 		const media = select( 'core' ).getMedia( featuredImageId );
 		return media?.media_details?.image_meta ?? null;
-	} );
+	}, [] );
 
 	if ( ! imageMeta ) return null;
 
