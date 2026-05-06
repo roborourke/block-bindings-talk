@@ -1,0 +1,16 @@
+{
+  "name": "block-bindings-talk",
+  "version": "1.0.0",
+  "description": "",
+  "license": "GPL-2.0-or-later",
+  "author": "",
+  "main": "index.js",
+  "scripts": {
+    "playground:start": "npx @wp-playground/cli server --auto-mount --login",
+    "build": "wp-scripts build",
+    "start": "wp-scripts start"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^30.0.0"
+  }
+}
