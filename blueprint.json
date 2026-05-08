@@ -1,0 +1,18 @@
+{
+  "login": true,
+  "landingPage": "/wp-admin/edit.php",
+  "steps": [
+    {
+      "step": "installPlugin",
+      "pluginData": {
+        "resource": "git:directory",
+        "url": "https://github.com/roborourke/block-bindings-talk",
+        "ref": "refs/heads/main",
+        "refType": "refname"
+      },
+      "options": {
+        "activate": true
+      }
+    }
+  ]
+}

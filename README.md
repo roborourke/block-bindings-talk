@@ -2,6 +2,8 @@
 
 Code examples from the Block Bindings talk.
 
+[![Open in WordPress Playground](https://img.shields.io/badge/Open%20in-WordPress%20Playground-3858e9?logo=wordpress&logoColor=white)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/roborourke/block-bindings-talk/main/blueprint.json)
+
 ## Resources
 
 ### Presentation
