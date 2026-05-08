@@ -77,13 +77,13 @@ add_action( 'init', function () : void {
         [
             'label'              => 'Featured Image Metadata',
             'get_value_callback' => function ( array $source_args, \WP_Block $block_instance ) : ?string {
-                $post_id      = $block_instance->context['postId'] ?? null;
-                $thumbnail_id = get_post_thumbnail_id( $post_id );
+                $post_id         = $block_instance->context['postId'] ?? null;
+                $thumbnail_id    = get_post_thumbnail_id( $post_id );
                 if ( ! $thumbnail_id ) return null;
-                $file = get_attached_file( $thumbnail_id );
-                if ( ! $file ) return null;
-                $meta = wp_read_image_metadata( $file );
-                $key  = $source_args['key'] ?? null;
+                $attachment_meta = wp_get_attachment_metadata( $thumbnail_id );
+                $meta            = $attachment_meta['image_meta'] ?? null;
+                if ( ! $meta ) return null;
+                $key = $source_args['key'] ?? null;
                 return ( $key && isset( $meta[ $key ] ) ) ? (string) $meta[ $key ] : null;
             },
             'uses_context' => [ 'postId' ],
@@ -101,8 +101,8 @@ add_action( 'init', function () : void {
  */
 add_filter( 'render_block_core/image', function ( $block_content, $block, \WP_Block $instance ) {
 
-    $block_content = var_export( $instance->context, true ) . $block_content;
-    $block_content = var_export( $block['attrs'], true ) . $block_content;
+    // $block_content = var_export( $instance->context, true ) . $block_content;
+    // $block_content = var_export( $block['attrs'], true ) . $block_content;
 
     return $block_content;
 }, 10, 3 );
