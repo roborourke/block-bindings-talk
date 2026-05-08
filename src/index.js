@@ -5,7 +5,7 @@ import { useSelect } from '@wordpress/data';
 import { store as editorStore } from '@wordpress/editor';
 import { useEntityProp } from '@wordpress/core-data';
 import { MediaUploadCheck, MediaUpload } from '@wordpress/block-editor';
-import { Button } from '@wordpress/components';
+import { Button, TextControl } from '@wordpress/components';
 
 const SUPPORTED_POST_TYPES = [ 'post', 'page' ];
 
@@ -68,7 +68,7 @@ function IllustrationPanel() {
 									? 'Replace Illustration'
 									: 'Select Illustration' }
 							</Button>
-							{ illustrationId && (
+							{ !! illustrationId && (
 								<Button
 									onClick={ onRemove }
 									variant="link"
@@ -124,4 +124,37 @@ function FeaturedImageMetadataPanel() {
 
 registerPlugin( 'block-bindings-featured-image-metadata', {
 	render: FeaturedImageMetadataPanel,
+} );
+
+function SubheadingPanel() {
+	const postType = useSelect(
+		( select ) => select( editorStore ).getCurrentPostType(),
+		[]
+	);
+
+	const [ meta, setMeta ] = useEntityProp( 'postType', postType, 'meta' );
+
+	if ( postType !== 'post' ) {
+		return null;
+	}
+
+	return (
+		<PluginDocumentSettingPanel
+			name="subheading-panel"
+			title="Subheading"
+		>
+			<TextControl
+				label="Subheading"
+				hideLabelFromVision
+				value={ meta?.subheading ?? '' }
+				onChange={ ( value ) =>
+					setMeta( { ...meta, subheading: value } )
+				}
+			/>
+		</PluginDocumentSettingPanel>
+	);
+}
+
+registerPlugin( 'block-bindings-subheading', {
+	render: SubheadingPanel,
 } );
