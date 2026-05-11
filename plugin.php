@@ -142,37 +142,7 @@ add_action( 'init', function () : void {
 } );
 
 // =============================================================================
-// 3. Custom Post Type – Book
-// =============================================================================
-//
-// Block bindings are not limited to built-in post types. This CPT demonstrates
-// that the same patterns work for any post type that supports the block editor
-// (show_in_rest: true is required for that).
-
-add_action( 'init', function () : void {
-
-    register_post_type( 'book', [
-        'labels'       => [
-            'name'          => _x( 'Books', 'Post type general name', 'textdomain' ),
-            'singular_name' => _x( 'Book',  'Post type singular name', 'textdomain' ),
-            'menu_name'     => _x( 'Books', 'Admin Menu text', 'textdomain' ),
-            'add_new_item'  => __( 'Add New Book', 'textdomain' ),
-            'edit_item'     => __( 'Edit Book', 'textdomain' ),
-            'view_item'     => __( 'View Book', 'textdomain' ),
-            'all_items'     => __( 'All Books', 'textdomain' ),
-            'not_found'     => __( 'No books found.', 'textdomain' ),
-        ],
-        'public'       => true,
-        'show_in_rest' => true, // required to use the block editor for this post type
-        'supports'     => [ 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ],
-        'rewrite'      => [ 'slug' => 'book' ],
-        'has_archive'  => true,
-    ] );
-
-} );
-
-// =============================================================================
-// 4. Dynamic Meta via Filter – Summary
+// 3. Dynamic Meta via Filter – Summary
 // =============================================================================
 //
 // Post meta doesn't have to be stored in the database. By hooking into
@@ -217,7 +187,7 @@ function generate_summary( int $post_id ) : string {
 }
 
 // =============================================================================
-// 5. Block Render Filter (debug helper)
+// 4. Block Render Filter (debug helper)
 // =============================================================================
 //
 // render_block_{block-name} fires when a specific block type is output on the
@@ -235,7 +205,7 @@ add_filter( 'render_block_core/image', function ( string $block_content, array $
 }, 10, 3 );
 
 // =============================================================================
-// 6. Enqueue Editor JavaScript
+// 5. Enqueue Editor JavaScript
 // =============================================================================
 //
 // @wordpress/scripts produces an asset manifest (build/index.asset.php) listing
